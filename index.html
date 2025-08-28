@@ -110,6 +110,27 @@
             -webkit-user-drag: none;
             user-select: none;
         }
+          /* Tooltip Styling */
+        .tooltip {
+            position: absolute;
+            top: -40px; /* Position above the logo container */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #2d3748;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            white-space: nowrap;
+            opacity: 0;
+            transition: opacity 0.2s ease-in-out;
+            pointer-events: none; /* So it doesn't interfere with dragging */
+            z-index: 2000;
+        }
+        
+        .logo-container:hover .tooltip {
+            opacity: 1;
+        }
 
         /* Submit Button */
         #submit-btn {
@@ -215,6 +236,15 @@
                     axis: 'x', // Only allow horizontal dragging
                     containment: '#main-container' // Keep logos within the main area
                 });
+                 // Create and add the tooltip element
+                const publicationName = logo.dataset.publication;
+                // Add spaces before capital letters for readability (e.g., "BrusselsTimes" -> "Brussels Times")
+                const formattedName = publicationName.replace(/([A-Z])/g, ' $1').trim();
+                
+                const tooltip = document.createElement('div');
+                tooltip.className = 'tooltip';
+                tooltip.textContent = formattedName;
+                logo.appendChild(tooltip);
             });
 
             // Function to show feedback messages
