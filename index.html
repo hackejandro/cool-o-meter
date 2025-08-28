@@ -242,6 +242,16 @@
             const submitBtn = document.getElementById('submit-btn');
             const messageDiv = document.getElementById('message');
             const logos = document.querySelectorAll('.logo-container');
+            const rainbowText = document.getElementById('rainbow-text');
+            const text = rainbowText.textContent;
+            rainbowText.innerHTML = ''; // Clear original text
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char;
+                // Stagger the animation start time for each letter to create a wave effect
+                span.style.animationDelay = `${index * 0.1}s`;
+                rainbowText.appendChild(span);
+            });
 
             // Initialize Draggabilly for each logo
             logos.forEach(logo => {
